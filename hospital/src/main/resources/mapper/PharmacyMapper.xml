@@ -1,0 +1,17 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.hospital.mapper.PharmacyMapper">
+    <!--查询药房药品清单-->
+    <select id="selpharmacy">
+        select DISTINCT p.pharmacyId,p.pharmacyName,sk.skullName,un.unitName,p.sellingPrice,
+        ar.areaName,ty.typeName,p.produceDate,p.validDate,p.skullbatch,p.drugstorenum from pharmacy p,drugstore dr,skull sk,warehuose wa,unit un,area ar,type ty where  p.skullId=sk.skullId AND
+        p.warehouseId=wa.warehouseId and p.unit=un.unitId and p.area=ar.areaId and p.type=ty.typeId
+        <if test="pharmacyName!=null and pharmacyName!=''">
+            and p.pharmacyName like concat('%' ,concat(#{pharmacyName},'%'))
+        </if>
+        ORDER BY p.pharmacyId desc
+
+    </select>
+</mapper>
