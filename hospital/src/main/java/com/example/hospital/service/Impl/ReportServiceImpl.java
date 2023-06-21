@@ -12,6 +12,15 @@ import java.util.List;
 @Service
 @Transactional
 public class ReportServiceImpl implements ReportService {
+    @Override
+    public List<ReportVo> sel(ReportVo reportVo) {
+        return reportMapper.sel(reportVo);
+    }
+    //查询某个患者的详细信息
+    @Override
+    public List<ReportVo> selById(Integer reportId) {
+        return reportMapper.selById(reportId);
+    }
     @Resource
     private ReportMapper reportMapper;
     @Override

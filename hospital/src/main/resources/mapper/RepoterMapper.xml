@@ -3,6 +3,70 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.hospital.mapper.ReportMapper">
+    <!--查询所有的挂号信息-->
+    <select id="sel" resultType="com.example.hospital.entity.ReportVo" parameterType="com.example.hospital.entity.ReportVo">
+        SELECT r.reportId,r.reportName,DATE_FORMAT(r.time,'%Y-%m-%d') datime,substr(r.carid,1,6) carido, substr(r.carid,16,18) caridt,r.phone,r.sex,r.age,p.department,d.doctorName,r.price,e.type,r.time,r.users,r.state,e.registeredid dregisteredid,d.doctorid ddoctorid,p.departmentId ddepartmentid
+        FROM  report r,doctor d,registeredtype e,departments p
+        WHERE r.doctor=d.doctorId
+        and d.registeredid=e.registeredId
+        and  r.department=p.departmentId and r.state=1
+        <if test="cc==2">
+            AND DATE_FORMAT(r.time,'%Y-%m-%d')=DATE_FORMAT(now(),"%Y-%m-%d")
+        </if>
+        <if test="cc==3">
+            AND DATE_FORMAT(r.time,'%Y-%m-%d') &gt; DATE_FORMAT(now(),"%Y-%m-%d")
+        </if>
+        <if test="reportName!=null and reportName!=''">
+            and r.reportName like concat('%' ,concat(#{reportName},'%'))
+            or d.doctorName like concat('%' ,concat(#{reportName},'%')) and r.doctor=d.doctorId
+            and d.registeredid=e.registeredId
+            and  r.department=p.departmentId and r.state=1
+            <if test="cc==2">
+                AND DATE_FORMAT(r.time,'%Y-%m-%d')=DATE_FORMAT(now(),"%Y-%m-%d")
+            </if>
+            <if test="cc==3">
+                AND DATE_FORMAT(r.time,'%Y-%m-%d') &gt; DATE_FORMAT(now(),"%Y-%m-%d")
+            </if>
+            or e.type like concat('%' ,concat(#{reportName},'%')) and r.doctor=d.doctorId
+            and d.registeredid=e.registeredId
+            and  r.department=p.departmentId and r.state=1
+            <if test="cc==2">
+                AND DATE_FORMAT(r.time,'%Y-%m-%d')=DATE_FORMAT(now(),"%Y-%m-%d")
+            </if>
+            <if test="cc==3">
+                AND DATE_FORMAT(r.time,'%Y-%m-%d') &gt; DATE_FORMAT(now(),"%Y-%m-%d")
+            </if>
+            or p.department like concat('%' ,concat(#{reportName},'%')) and r.doctor=d.doctorId
+            and d.registeredid=e.registeredId
+            and  r.department=p.departmentId and r.state=1
+            <if test="cc==2">
+                AND DATE_FORMAT(r.time,'%Y-%m-%d')=DATE_FORMAT(now(),"%Y-%m-%d")
+            </if>
+            <if test="cc==3">
+                AND DATE_FORMAT(r.time,'%Y-%m-%d') &gt; DATE_FORMAT(now(),"%Y-%m-%d")
+            </if>
+            or r.phone like concat('%' ,concat(#{reportName},'%')) and r.doctor=d.doctorId
+            and d.registeredid=e.registeredId
+            and  r.department=p.departmentId and r.state=1
+            <if test="cc==2">
+                AND DATE_FORMAT(r.time,'%Y-%m-%d')=DATE_FORMAT(now(),"%Y-%m-%d")
+            </if>
+            <if test="cc==3">
+                AND DATE_FORMAT(r.time,'%Y-%m-%d') &gt; DATE_FORMAT(now(),"%Y-%m-%d")
+            </if>
+            or r.carid like concat('%' ,concat(#{reportName},'%')) and r.doctor=d.doctorId
+            and d.registeredid=e.registeredId
+            and  r.department=p.departmentId and r.state=1
+            <if test="cc==2">
+                AND DATE_FORMAT(r.time,'%Y-%m-%d')=DATE_FORMAT(now(),"%Y-%m-%d")
+            </if>
+            <if test="cc==3">
+                AND DATE_FORMAT(r.time,'%Y-%m-%d') &gt; DATE_FORMAT(now(),"%Y-%m-%d")
+            </if>
+
+        </if>
+        ORDER BY r.reportId DESC
+    </select>
     <!--添加挂号人员-->
     <insert id="addre" parameterType="com.example.hospital.entity.Report">
         INSERT INTO report (reportname,sex,age,department,doctor,reporttype,price,time,users,state,phone,carid)
