@@ -1,0 +1,43 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.hospital.mapper.DoctorMapper">
+<!--    查询医生-->
+    <select id="doctorList">
+        select*from doctor d,departments de,registeredtype r where d.departmentId=de.departmentId and d.registeredId=r.registeredId
+        <if test="doctorName!=null and doctorName!=''">
+            and   d.doctorName like concat('%',concat(#{doctorName},'%'))
+        </if>
+        <if test="dstate!=null">
+            and   d.dstate =#{dstate}
+        </if> and dstate!=3
+        ORDER BY doctorId asc
+
+    </select>
+<!--    添加-->
+    <insert id="addDoctor">
+        insert into doctor(doctorName,departmentId,registeredId,dstate)values(#{doctorName},#{departmentId},#{registeredId},#{dstate})
+    </insert>
+<!--    编辑-->
+    <update id="editDoctor">
+        update doctor set departmentId=#{departmentId},registeredId=#{registeredId},dstate=#{dstate} where doctorId=#{doctorId}
+    </update>
+<!--    删除-->
+    <update id="deleteDoctor" parameterType="Integer">
+        update doctor set dstate=3 where DoctorId=#{DoctorId}
+    </update>
+
+    <select id="count" resultType="int">
+        select count(*) from doctor where doctorName=#{doctorName} and dstate=0
+    </select>
+<!--    判断医生是否还有病人-->
+    <select id="checkCount" resultType="int">
+        select count(r.reportId) from report r ,doctor d where r.doctor=d.doctorId and r.doctor=#{doctorId} and d.dstate=0 and r.state=1
+    </select>
+<!--    部门-->
+    <select id="findAllDepartments">
+        select*from departments
+    </select>
+
+</mapper>
