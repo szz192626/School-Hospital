@@ -1,5 +1,6 @@
 package com.example.hospital.service;
 
+import com.example.hospital.entity.Registeredtype;
 import com.example.hospital.entity.Report;
 import com.example.hospital.entity.ReportVo;
 
@@ -20,4 +21,8 @@ public interface ReportService {
     int upddang();
     //从门诊转入住院
     Integer zhuanyuan(Report report);
+    //查询所有的门诊类型
+    List<Registeredtype> selreg();
+    //根据所选挂号类型查询该科室的价格
+    Integer seltymo(Registeredtype registeredtype);
 }

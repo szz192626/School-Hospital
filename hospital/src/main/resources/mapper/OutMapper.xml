@@ -1,0 +1,26 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hospital.mapper.OutMapper">
+<!--查询该用户上有没有该项目-->
+<select id="selchuo" resultType="Integer" parameterType="Cashier">
+    SELECT * FROM cashier WHERE reportId=#{reportId} AND durgname=#{durgname} ORDER BY cashier DESC
+</select>
+        <!--添加处方项目-->
+<insert id="addchuo" parameterType="Cashier">
+INSERT INTO cashier (reportId,durgname,durgnum,repiceprice,repicetotal,state,ctime,ostate,mstate)
+VALUES (#{reportId},#{durgname},#{durgnum},#{repiceprice},#{repicetotal},1,NOW(),#{ostate},0)
+</insert>
+        <!--修改处方表上的信息-->
+<update id="updchuo" parameterType="Cashier">
+UPDATE cashier SET durgnum = durgnum+#{durgnum},repicetotal=repicetotal+#{repicetotal} WHERE durgname = #{durgname}
+</update>
+        <!--删除处方中的项目-->
+<delete id="delo" parameterType="Cashier">
+DELETE FROM cashier WHERE cashier = #{cashier}
+</delete>
+        <!--查询该用户的处方总价-->
+<select id="selch" parameterType="Cashier" resultType="Double">
+SELECT SUM(repicetotal) FROM cashier WHERE reportId=#{reportId} and state=0
+</select>
+</mapper>
