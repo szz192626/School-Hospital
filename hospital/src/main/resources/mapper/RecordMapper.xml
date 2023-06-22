@@ -1,0 +1,24 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.hospital.mapper.RecordMapper">
+    <!--查询药房药品清单-->
+    <select id="selrecord">
+        select * from jilu
+
+        <if test="jilutype!=null">
+            where  jilutype like concat('%' ,concat(#{jilutype},'%'))
+        </if>
+        order by  jiluid desc
+
+    </select>
+
+    <insert id="addjilu">
+
+        INSERT into jilu(jiluname,jilutime,jilutype,jilupeople,jilupihao,jilunumber)VALUES
+            (#{jiluname},now(),#{jilutype},#{jilupeople},#{jilupihao},#{jilunumber})
+    </insert>
+
+
+</mapper>
