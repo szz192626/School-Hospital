@@ -1,5 +1,6 @@
 package com.example.hospital.mapper;
 
+import com.example.hospital.entity.Registeredtype;
 import com.example.hospital.entity.Report;
 import com.example.hospital.entity.ReportVo;
 import org.apache.ibatis.annotations.Mapper;
@@ -22,4 +23,8 @@ public interface ReportMapper {
     int upddang();
     //从门诊转入住院
     Integer zhuanyuan(Report report);
+    //查询所有的门诊类型
+    List<Registeredtype> selreg();
+    //根据所选科室查询该科室的价格
+    Integer seltymo(Registeredtype registeredtype);
 }

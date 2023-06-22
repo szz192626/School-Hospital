@@ -1,5 +1,6 @@
 package com.example.hospital.service.Impl;
 
+import com.example.hospital.entity.Registeredtype;
 import com.example.hospital.entity.Report;
 import com.example.hospital.entity.ReportVo;
 import com.example.hospital.mapper.ReportMapper;
@@ -52,6 +53,15 @@ public class ReportServiceImpl implements ReportService {
     public Integer zhuanyuan( Report report) {
         return  reportMapper.zhuanyuan(report);
     }
-
+    //查询挂号类型
+    @Override
+    public List<Registeredtype> selreg() {
+        return reportMapper.selreg();
+    }
+    //根据所选挂号类型查询该科室的价格
+    @Override
+    public Integer seltymo(Registeredtype registeredtype) {
+        return reportMapper.seltymo(registeredtype);
+    }
 
 }
