@@ -74,6 +74,7 @@
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.28" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:5.1.10.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.1.10.RELEASE" />
+          <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.18.10" />
         </element>
       </element>
       <element id="directory" name="META-INF">
