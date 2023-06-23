@@ -1,5 +1,6 @@
 package com.example.hospital.mapper;
 
+import com.example.hospital.entity.Lack;
 import com.example.hospital.entity.Recovery;
 import com.example.hospital.entity.YPharmacy;
 
@@ -9,8 +10,7 @@ public interface PharmacyMapper {
     //查询药房药品
     List<YPharmacy> selpharmacy(YPharmacy ypharmacy);
 
-
-    //回收给药房
+    //库房回收，删除药房药品信息
     int delpharymacy(YPharmacy ypharmacy);
     //回收表
     int addrecovery(Recovery recovery);
@@ -18,4 +18,11 @@ public interface PharmacyMapper {
     List<Recovery>selrecovery(Recovery recovery);
     //删除回收表
     int delrecovery(Recovery recovery);
+
+    //添加药品到报缺表
+    int addlack(Lack lack);
+    //查询报缺表药品名称是否已存在
+    int sellackName(Lack lack);
+    //修改数量
+    int uplacknum(Lack lack);
 }
