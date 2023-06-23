@@ -1,5 +1,6 @@
 package com.example.hospital.service.Impl;
 
+import com.example.hospital.entity.Schedule;
 import com.example.hospital.mapper.MainMapper;
 
 import com.example.hospital.service.MainService;

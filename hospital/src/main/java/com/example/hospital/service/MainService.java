@@ -1,5 +1,7 @@
 package com.example.hospital.service;
 
+import com.example.hospital.entity.Schedule;
+
 import java.util.List;
 
 public interface MainService {
