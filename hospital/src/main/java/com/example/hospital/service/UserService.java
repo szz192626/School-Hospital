@@ -3,6 +3,7 @@ package com.example.hospital.service;
 import com.example.hospital.entity.DataGridView;
 import com.example.hospital.entity.Role;
 import com.example.hospital.entity.User;
+import com.example.hospital.entity.UserRole;
 
 import java.util.List;
 
@@ -21,6 +22,8 @@ public interface UserService {
     int resetUserPwd(User user);
     //查询所有用户角色
     DataGridView queryUserRole(Integer userid);
+    //保存用户和角色的关系
+    void saveUserRole(UserRole userRole);
     //修改个人资料
     List<User> updateLogin(User user);
     int editLogin(User user);
