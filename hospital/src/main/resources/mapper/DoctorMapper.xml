@@ -39,5 +39,9 @@
     <select id="findAllDepartments">
         select*from departments
     </select>
+<!--    类型-->
+    <select id="findAllRegisteredtype" >
+        select*from Registeredtype
+    </select>
 
 </mapper>

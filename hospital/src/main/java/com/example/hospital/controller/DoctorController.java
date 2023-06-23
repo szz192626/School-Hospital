@@ -2,6 +2,8 @@ package com.example.hospital.controller;
 
 import com.example.hospital.entity.Departments;
 import com.example.hospital.entity.Doctor;
+import com.example.hospital.entity.Registeredtype;
+import com.example.hospital.entity.Schedule;
 import com.example.hospital.service.DoctorService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -43,7 +45,7 @@ public class DoctorController {
      * */
     @RequestMapping("addDoctor")
     @ResponseBody
-    public Object addDoctor(Doctor doctor){//未写完paiban
+    public Object addDoctor(Doctor doctor, Schedule schedule){
         int count = doctorService.count(doctor);
         if(count==0){
             int i = doctorService.addDoctor(doctor);
@@ -100,4 +102,12 @@ public class DoctorController {
         List<Departments> allDepartments = doctorService.findAllDepartments();
         return allDepartments;
     }
+
+//    查询类型
+    @RequestMapping("findAllRegisteredtype")
+    @ResponseBody
+    public Object findAllRegisteredtype(){
+    List<Registeredtype> allRegisteredtype = doctorService.findAllRegisteredtype();
+    return allRegisteredtype;
+}
 }

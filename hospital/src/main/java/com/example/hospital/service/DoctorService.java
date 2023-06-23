@@ -2,6 +2,7 @@ package com.example.hospital.service;
 
 import com.example.hospital.entity.Departments;
 import com.example.hospital.entity.Doctor;
+import com.example.hospital.entity.Registeredtype;
 
 import java.util.List;
 
@@ -21,4 +22,5 @@ public interface DoctorService {
     int checkCount(Integer doctorId);
 
     List<Departments> findAllDepartments();
+    List<Registeredtype>findAllRegisteredtype();
 }
