@@ -1,7 +1,9 @@
 package com.example.hospital.mapper;
 
 
+import com.example.hospital.entity.DataGridView;
 import com.example.hospital.entity.Role;
+import com.example.hospital.entity.RoleMenu;
 import com.example.hospital.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -16,14 +18,20 @@ public interface UserMapper {
     List<Role> initUserRole(Role role);
     //添加用户
     int addUser(User user);
+    //删除用户所拥有的角色
+    void deleteUser(Integer userid);
     int deleteUserById(Integer userid);
     int deleteRoleUser(Integer userid);
     //重置密码
     int resetUserPwd(User user);
+    //查询所有用户角色
+    DataGridView queryUserRole(Integer userid);
     //查询所有角色
     List<Role> queryAllRole();
     //按照用户id查询角色
     List<Role> queryRoleById(Integer uid);
+    //保存角色和菜单
+    void saveRoleMenu(RoleMenu roleMenu);
     //保存用户和角色
     void insertUserRole(@Param("uid")Integer userid, @Param("rid")Integer rid);
 

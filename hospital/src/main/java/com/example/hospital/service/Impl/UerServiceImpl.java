@@ -3,6 +3,7 @@ package com.example.hospital.service.Impl;
 import com.example.hospital.entity.DataGridView;
 import com.example.hospital.entity.Role;
 import com.example.hospital.entity.User;
+import com.example.hospital.entity.UserRole;
 import com.example.hospital.mapper.UserMapper;
 import com.example.hospital.service.UserService;
 import org.springframework.stereotype.Service;
@@ -81,7 +82,19 @@ public class UerServiceImpl implements UserService {
         }
         return new DataGridView(data);
     }
+    @Override
+    public void saveUserRole(UserRole userRole) {
+        Integer userid=userRole.getUserid();
+        Integer[] roleids=userRole.getIds();
+        userMapper.deleteRoleUser(userid);
+        //循环添加用户分配的角色
+        if(roleids!=null&&roleids.length>0){
+            for(Integer rid:roleids){
+                userMapper.insertUserRole(userid,rid);
+            }
+        }
 
+    }
     @Override
     public List<User> updateLogin(User user) {
         return userMapper.updateLogin(user);
