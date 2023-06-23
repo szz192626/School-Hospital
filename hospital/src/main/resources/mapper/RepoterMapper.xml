@@ -96,4 +96,12 @@
     <update id="zhuanyuan" parameterType="com.example.hospital.entity.Report">
         UPDATE report SET state =4,zhuan=#{zhuan} WHERE reportId=#{reportId}
     </update>
+    <!--查询所有的挂号类型-->
+    <select id="selreg" resultType="com.example.hospital.entity.Registeredtype">
+        select * from  registeredtype
+    </select>
+    <!--根据挂号类型去查找多钱-->
+    <select id="seltymo" parameterType="com.example.hospital.entity.Registeredtype" resultType="Integer">
+        select price from registeredtype where registeredId=#{registeredId}
+    </select>
 </mapper>

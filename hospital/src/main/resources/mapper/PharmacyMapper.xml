@@ -14,4 +14,20 @@
         ORDER BY p.pharmacyId desc
 
     </select>
+
+    <!--    回收给药房-->
+    <delete id="delpharymacy" >
+        delete  from pharmacy where pharmacyId =#{pharmacyId}
+    </delete>
+    <!--   添加到回收表-->
+    <insert id="addrecovery" >
+        insert into huishou(huishouname,huishounumber,huishoupihao,jbr,beizhu) VALUES(#{huishouname},#{huishounumber},#{huishoupihao},#{jbr},#{beizhu});
+    </insert>
+    <!-- 查询药房回收表数据-->
+    <select id="selrecovery">
+        select  * from huishou
+    </select>
+    <delete id="delrecovery">
+        delete  from huishou where huishouid  =#{huishouid}
+    </delete>
 </mapper>

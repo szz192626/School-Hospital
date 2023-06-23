@@ -1,5 +1,6 @@
 package com.example.hospital.controller;
 
+import com.example.hospital.entity.Registeredtype;
 import com.example.hospital.entity.Report;
 import com.example.hospital.entity.ReportVo;
 import com.example.hospital.service.ReportService;
@@ -85,5 +86,19 @@ public class ReportController {
         report.setZhuan(zhuan);
         Integer zhuanyuan = reportService.zhuanyuan(report);
         return zhuanyuan;
+    }
+    //查询所有的挂号类型
+    @RequestMapping("/selreg")
+    @ResponseBody
+    public Object selreg(){
+        List<Registeredtype> selreg = reportService.selreg();
+        return selreg;
+    }
+    //根据挂号类型查找该类型的价格
+    @RequestMapping("seltymo")
+    @ResponseBody
+    public Object seltymo(Registeredtype registeredtype){
+        Integer seltymo = reportService.seltymo(registeredtype);
+        return seltymo;
     }
 }
