@@ -3,6 +3,7 @@ package com.example.hospital.controller;
 import com.example.hospital.config.UserCredentialsMatcher;
 import com.example.hospital.entity.DataGridView;
 import com.example.hospital.entity.User;
+import com.example.hospital.entity.UserRole;
 import com.example.hospital.service.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -114,6 +115,15 @@ public class UserController {
         userService.resetUserPwd(user);
         return "重置成功";
 
+    }
+    /*
+     * 保存用户和角色的关系
+     * */
+    @RequestMapping("saveUserRole")
+    @ResponseBody
+    public Object saveUserRole(UserRole userRole){
+        userService.saveUserRole(userRole);
+        return "分配成功";
     }
     /*
      * 修改资料
