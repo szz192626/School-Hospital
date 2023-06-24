@@ -1,8 +1,6 @@
 package com.example.hospital.mapper;
 
-import com.example.hospital.entity.Registeredtype;
-import com.example.hospital.entity.Report;
-import com.example.hospital.entity.ReportVo;
+import com.example.hospital.entity.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -27,4 +25,14 @@ public interface ReportMapper {
     List<Registeredtype> selreg();
     //根据所选科室查询该科室的价格
     Integer seltymo(Registeredtype registeredtype);
+    //查询医生的信息
+    List<ReportVo> one(Doctor doctor);
+    List<ReportVo> two(Doctor doctor);
+    List<ReportVo> three(Doctor doctor);
+    List<ReportVo> four(Doctor doctor);
+    List<ReportVo> five(Doctor doctor);
+    List<ReportVo> six(Doctor doctor);
+    List<ReportVo> seven(Doctor doctor);
+    //查询所有的科室
+    List<Departments> seldep();
 }
