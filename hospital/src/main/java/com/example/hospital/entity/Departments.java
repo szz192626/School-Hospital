@@ -1,8 +1,8 @@
 package com.example.hospital.entity;
 
 public class Departments {
-    private Integer departmentId;
-    private String department;
+    private Integer departmentId;//科室id
+    private String department;//科室姓名
 
     public Integer getDepartmentId() {
         return departmentId;
