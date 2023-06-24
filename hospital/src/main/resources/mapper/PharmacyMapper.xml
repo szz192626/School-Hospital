@@ -30,4 +30,17 @@
     <delete id="delrecovery">
         delete  from huishou where huishouid  =#{huishouid}
     </delete>
+
+    <insert id="addlack"  >
+        INSERT into baoque(baoqueName,baoqueNum)VALUES(#{baoqueName},#{baoqueNum})
+    </insert>
+    <!-- 添加报缺药品时 查询报缺表是否已存在此药-->
+    <select id="sellackname" resultType="Integer">
+        SELECT count(*)from  baoque where baoqueName=#{baoqueName}
+
+    </select>
+    <!--   已存在则修改数量-->
+    <update id="uplacknum">
+        UPDATE baoque set baoqueNum =(baoqueNum+#{baoqueNum}) where baoqueName=#{baoqueName}
+    </update>
 </mapper>

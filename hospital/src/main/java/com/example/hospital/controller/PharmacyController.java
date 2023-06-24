@@ -1,5 +1,6 @@
 package com.example.hospital.controller;
 
+import com.example.hospital.entity.Lack;
 import com.example.hospital.entity.Record;
 import com.example.hospital.entity.Recovery;
 import com.example.hospital.entity.YPharmacy;
@@ -56,7 +57,7 @@ public class PharmacyController {
     //查询药品仓库
     @RequestMapping("selectrecovery")
     @ResponseBody
-    public Object selecthuishou(Recovery recovery, Integer page, Integer limit) {
+    public Object selectrecovery(Recovery recovery, Integer page, Integer limit) {
         System.out.print("进去查询药房方法");
         PageHelper.startPage(page, limit);
         List<Recovery> drugstores = pharmacyService.selrecovery(recovery);
@@ -73,16 +74,31 @@ public class PharmacyController {
     }
     @RequestMapping("delrecovery")
     @ResponseBody
-    public  Integer delhuishou(Recovery recovery, Record record){
+    public  Integer delrecovery(Recovery recovery, Record record){
         //删除回收表此药（处理）
         System.out.println("进入处理");
-        int delhuishou = pharmacyService.delrecovery(recovery);
-        if(delhuishou==1){
+        int delrecovery = pharmacyService.delrecovery(recovery);
+        if(delrecovery==1){
             System.out.print("添加记录表");
             int addjilu = rs.addjilu(record);//添加一条记录
         }
 
-        return delhuishou;
+        return delrecovery;
+
+    }
+
+    //添加一条药品采到报缺单
+    @RequestMapping("addlack")
+    @ResponseBody
+    public Integer addbaoque( Lack lack) {
+        Integer sellackname = pharmacyService.sellackname(lack);//查询报缺单是否已经有此条药品
+        if(sellackname==0){
+            int addlack =pharmacyService.addlack(lack);//添加药品
+            return addlack;
+        }else {
+            int uplacknum = pharmacyService.uplacknum(lack);//修改药品数量
+            return uplacknum;
+        }
 
     }
 

@@ -2,6 +2,8 @@ package com.example.hospital.controller;
 
 import com.example.hospital.entity.Cashier;
 import com.example.hospital.entity.Outpatienttype;
+import com.example.hospital.entity.Pharmacy;
+import com.example.hospital.entity.ReportVo;
 import com.example.hospital.service.OutService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -36,7 +38,23 @@ public class OutController {
         return  "cao/Ctoll";
     }
     //查询药品所有信息
-
+    @RequestMapping("selout")
+    @ResponseBody
+    public Object seldrug(Outpatienttype coutpatienttype, Integer page, Integer limit,String projectName){
+        coutpatienttype.setProjectName(projectName);
+        PageHelper.startPage(page, limit);
+        List<Pharmacy> selout = cOutService.selout(coutpatienttype);
+        PageInfo pageInfo = new PageInfo(selout);
+        Map<String, Object> tableData = new HashMap<String, Object>();
+        //这是layui要求返回的json数据格式，如果后台没有加上这句话的话需要在前台页面手动设置
+        tableData.put("code", 0);
+        tableData.put("msg", "");
+        //将全部数据的条数作为count传给前台（一共多少条）
+        tableData.put("count", pageInfo.getTotal());
+        //将分页后的数据返回（每页要显示的数据）
+        tableData.put("data", pageInfo.getList());
+        return tableData;
+    }
 
 
 
@@ -62,7 +80,15 @@ public class OutController {
         return addchuo;
     }
     //如果处方中有该药品则修改该药品的数量和价钱
-
+    @RequestMapping("updchuo")
+    @ResponseBody
+    public Object updchuo(Cashier cCashier,Pharmacy cPharmacy){
+        //修改处方中药品的数量
+        Integer updchuo = cOutService.updchuo(cCashier);
+        String pharmacyName=cCashier.getDurgname();
+        cPharmacy.setPharmacyName(pharmacyName);
+        return updchuo;
+    }
 
     //删除处方中的药品
     @RequestMapping("delo")
@@ -76,7 +102,20 @@ public class OutController {
         }
     }
     //查询处方的总价钱
-
+    @RequestMapping("selch")
+    @ResponseBody
+    public Object selch(Cashier cCashier){
+        Double selch = cOutService.selch(cCashier);
+        return selch;
+    }
+    @RequestMapping("shoufei")
+    @ResponseBody
+    public Object shoufei(ReportVo reportVo){
+        Integer shoufei = cOutService.shoufei(reportVo);
+        //把挂号费添加到收费表上
+        Integer guafei = cOutService.guafei(reportVo);
+        return  shoufei;
+    }
 
 }
 
