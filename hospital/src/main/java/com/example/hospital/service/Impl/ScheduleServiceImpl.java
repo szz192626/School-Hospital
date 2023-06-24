@@ -3,11 +3,13 @@ package com.example.hospital.service.Impl;
 import com.example.hospital.entity.Schedule;
 import com.example.hospital.entity.Work;
 import com.example.hospital.mapper.ScheduleMapper;
+import com.example.hospital.service.ScheduleService;
 
 import javax.annotation.Resource;
 import java.util.List;
 
-public class ScheduleServiceImpl {
+
+public class ScheduleServiceImpl  {
     @Resource
     private ScheduleMapper scheduleMapper;
 
