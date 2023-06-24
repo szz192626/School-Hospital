@@ -1,0 +1,88 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.hospital.mapper.CashierMapper">
+    <!--查询所有患者-->
+    <select id="sel" resultType="com.example.hospital.entity.ReportVo">
+        SELECT r.reportId,r.reportName,r.carid,r.phone,r.sex,r.price,r.age,p.department,d.doctorName,r.price,e.type,r.time,r.users,r.state,e.registeredid dregisteredid,d.doctorid ddoctorid,p.departmentId ddepartmentid
+        FROM  report r,doctor d,registeredtype e,departments p
+        WHERE r.doctor=d.doctorId
+          and d.registeredid=e.registeredId
+          and  r.department=p.departmentId and r.state=1 AND DATE_FORMAT(r.time,'%Y-%m-%d')=DATE_FORMAT(now(),"%Y-%m-%d") ORDER BY r.reportid DESC
+    </select>
+        <!--查询所有药品信息-->
+    <select id="selpharm" resultType="com.example.hospital.entity.Pharmacy" parameterType="com.example.hospital.entity.Pharmacy">
+        SELECT p.*,u.unitName unitName FROM pharmacy p ,unit u WHERE p.unit=u.unitId
+        <if test="pharmacyName!=null and pharmacyName!=''">
+            and  p.pharmacyName like concat('%' ,concat(#{pharmacyName},'%'))
+        </if>
+    </select>
+    <!--查询这个用户的处方表上有没有这个-->
+    <select id="selcadr" resultType="Integer" parameterType="com.example.hospital.entity.Cashier">
+        SELECT * FROM cashier WHERE reportId=#{reportId} AND durgname=#{durgname}
+    </select>
+    <!--添加处方药品-->
+    <insert id="addchu" parameterType="com.example.hospital.entity.Cashier">
+        INSERT INTO cashier (reportId,durgname,durgnum,repiceprice,repicetotal,state,ctime)
+        VALUES (#{reportId},#{durgname},#{durgnum},#{repiceprice},#{repicetotal},0,NOW())
+    </insert>
+    <!--修改处方表上的信息-->
+    <update id="updchu" parameterType="com.example.hospital.entity.Cashier">
+        UPDATE cashier SET durgnum = durgnum+#{durgnum},repicetotal=repicetotal+#{repicetotal} WHERE durgname = #{durgname}
+    </update>
+    <!--查询该用户的药品处方-->
+    <select id="selpepi" resultType="com.example.hospital.entity.Cashier" parameterType="Integer">
+        select * from cashier where reportId=#{perid} and state =0
+    </select>
+    <!--删除处方中的药品-->
+    <delete id="del" parameterType="com.example.hospital.entity.Cashier">
+        DELETE FROM cashier WHERE cashier = #{cashier}
+    </delete>
+    <!--减少药房中数量-->
+    <update id="deldrunum" parameterType="com.example.hospital.entity.Pharmacy">
+        UPDATE pharmacy SET drugstorenum = drugstorenum-#{drugstorenum} WHERE pharmacyName = #{pharmacyName}
+    </update>
+    <!--添加药品的数量-->
+    <update id="adddrunum" parameterType="com.example.hospital.entity.Pharmacy">
+        UPDATE pharmacy SET drugstorenum = drugstorenum+#{drugstorenum} WHERE pharmacyName = #{pharmacyName}
+    </update>
+    <!--模糊查询-->
+    <select id="mohu" resultType="com.example.hospital.entity.ReportVo" parameterType="com.example.hospital.entity.ReportVo">
+        SELECT r.reportId,r.reportName,substr(r.carid,1,6) carido, substr(r.carid,16,18) caridt,r.phone,r.sex,r.age,p.department,d.doctorName,r.price,e.type,r.time,r.users,r.state,e.registeredid dregisteredid,d.doctorid ddoctorid,p.departmentId ddepartmentid
+        FROM  report r,doctor d,registeredtype e,departments p
+        WHERE r.doctor=d.doctorId
+        and d.registeredid=e.registeredId
+        and  r.department=p.departmentId and r.state=1 AND DATE_FORMAT(r.time,'%Y-%m-%d')=DATE_FORMAT(now(),"%Y-%m-%d")
+        <if test="reportName!=null and reportName!=''">
+            and r.reportName like concat('%' ,concat(#{reportName},'%'))
+            or d.doctorName like concat('%' ,concat(#{reportName},'%')) and r.doctor=d.doctorId
+            and d.registeredid=e.registeredId
+            and  r.department=p.departmentId and r.state=1 AND DATE_FORMAT(r.time,'%Y-%m-%d')=DATE_FORMAT(now(),"%Y-%m-%d")
+            or e.type like concat('%' ,concat(#{reportName},'%')) and r.doctor=d.doctorId
+            and d.registeredid=e.registeredId
+            and  r.department=p.departmentId and r.state=1 AND DATE_FORMAT(r.time,'%Y-%m-%d')=DATE_FORMAT(now(),"%Y-%m-%d")
+            or p.department like concat('%' ,concat(#{reportName},'%')) and r.doctor=d.doctorId
+            and d.registeredid=e.registeredId
+            and  r.department=p.departmentId and r.state=1 AND DATE_FORMAT(r.time,'%Y-%m-%d')=DATE_FORMAT(now(),"%Y-%m-%d")
+            or r.phone like concat('%' ,concat(#{reportName},'%')) and r.doctor=d.doctorId
+            and d.registeredid=e.registeredId
+            and  r.department=p.departmentId and r.state=1 AND DATE_FORMAT(r.time,'%Y-%m-%d')=DATE_FORMAT(now(),"%Y-%m-%d")
+            or r.carid like concat('%' ,concat(#{reportName},'%')) and r.doctor=d.doctorId
+            and d.registeredid=e.registeredId
+            and  r.department=p.departmentId and r.state=1 AND DATE_FORMAT(r.time,'%Y-%m-%d')=DATE_FORMAT(now(),"%Y-%m-%d")
+        </if>
+    </select>
+    <!--修改用户病例-->
+    <update id="addbing" parameterType="com.example.hospital.entity.Report">
+        UPDATE report SET zhuan = #{zhuan} WHERE reportId = #{reportId}
+    </update>
+    <!--查询用户没有用填写病例-->
+    <select id="selbing" resultType="String" parameterType="Integer">
+        SELECT zhuan FROM report WHERE reportId=#{rid}
+    </select>
+    <!--查询所有药房-->
+    <select id="selware" resultType="CWarehuose">
+        select * from warehuose
+    </select>
+</mapper>
