@@ -9,6 +9,7 @@ import com.example.hospital.service.RecordService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -16,6 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Controller
+@RequestMapping("pharmacy")
 public class PharmacyController {
     @Autowired
     private PharmacyService pharmacyService;
@@ -90,7 +93,7 @@ public class PharmacyController {
     //添加一条药品采到报缺单
     @RequestMapping("addlack")
     @ResponseBody
-    public Integer addbaoque( Lack lack) {
+    public Integer addlack( Lack lack) {
         Integer sellackname = pharmacyService.sellackname(lack);//查询报缺单是否已经有此条药品
         if(sellackname==0){
             int addlack =pharmacyService.addlack(lack);//添加药品

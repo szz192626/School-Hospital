@@ -5,10 +5,15 @@ import com.example.hospital.entity.Recovery;
 import com.example.hospital.entity.YPharmacy;
 import com.example.hospital.mapper.PharmacyMapper;
 import com.example.hospital.service.PharmacyService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
 
+
+@Service
+@Transactional
 public class PharmacyServiceImpl implements PharmacyService {
     @Resource
     private PharmacyMapper pm;
