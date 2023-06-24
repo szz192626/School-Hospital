@@ -1,8 +1,6 @@
 package com.example.hospital.service;
 
-import com.example.hospital.entity.Registeredtype;
-import com.example.hospital.entity.Report;
-import com.example.hospital.entity.ReportVo;
+import com.example.hospital.entity.*;
 
 import java.util.List;
 
@@ -25,4 +23,14 @@ public interface ReportService {
     List<Registeredtype> selreg();
     //根据所选挂号类型查询该科室的价格
     Integer seltymo(Registeredtype registeredtype);
+    //查询所有的科室
+    List<Departments> seldep();
+    //查询医生的信息
+    List<ReportVo> one(Doctor doctor);
+    List<ReportVo> two(Doctor doctor);
+    List<ReportVo> three(Doctor doctor);
+    List<ReportVo> four(Doctor doctor);
+    List<ReportVo> five(Doctor doctor);
+    List<ReportVo> six(Doctor doctor);
+    List<ReportVo> seven(Doctor doctor);
 }

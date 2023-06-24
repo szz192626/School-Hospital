@@ -1,8 +1,6 @@
 package com.example.hospital.controller;
 
-import com.example.hospital.entity.Registeredtype;
-import com.example.hospital.entity.Report;
-import com.example.hospital.entity.ReportVo;
+import com.example.hospital.entity.*;
 import com.example.hospital.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -100,5 +99,42 @@ public class ReportController {
     public Object seltymo(Registeredtype registeredtype){
         Integer seltymo = reportService.seltymo(registeredtype);
         return seltymo;
+    }
+    //查询所有的科室
+    @RequestMapping("seldep")
+    @ResponseBody
+    public Object seldep(){
+        List<Departments> seldep = reportService.seldep();
+        return  seldep;
+    }
+    //查询医生信息
+    @RequestMapping("seldoctor")
+    @ResponseBody
+    public Object seldoctor(Doctor doctor){
+        Calendar calendar = Calendar.getInstance();
+        Integer data=calendar.get(Calendar.DAY_OF_WEEK)-1;//获取当前是星期几
+        if(data==1){
+            List<ReportVo> one = reportService.one(doctor);
+            return one;
+        }else if(data==2){
+            List<ReportVo> two = reportService.two(doctor);
+            return two;
+        }else if(data==3){
+            List<ReportVo> three = reportService.three(doctor);
+            return three;
+        }else if(data==4){
+            List<ReportVo> four = reportService.four(doctor);
+            return four;
+        }else if(data==5){
+            System.out.println(data);
+            List<ReportVo> five = reportService.five(doctor);
+            return five;
+        }else if(data==6){
+            List<ReportVo> six = reportService.six(doctor);
+            return six;
+        }else{
+            List<ReportVo> seven = reportService.seven(doctor);
+            return seven;
+        }
     }
 }

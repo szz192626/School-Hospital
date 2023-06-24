@@ -1,0 +1,72 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.hospital.mapper.FinanceMapper">
+    <select id="reportYearFinance" resultType="java.lang.Double">
+        select
+            sum(repicetotal) from cashier c,report r  where
+            DATE_FORMAT(ctime,"%Y%m")=concat(#{value},'01') and c.reportId=r.reportId and r.state=3
+        UNION all
+        select
+            sum(repicetotal) from cashier c,report r  where
+            DATE_FORMAT(ctime,"%Y%m")=concat(#{value},'02') and c.reportId=r.reportId and r.state=3
+        UNION all
+        select
+            sum(repicetotal) from cashier c,report r  where
+            DATE_FORMAT(ctime,"%Y%m")=concat(#{value},'03') and c.reportId=r.reportId and r.state=3
+        UNION all
+        select
+            sum(repicetotal) from cashier c,report r  where
+            DATE_FORMAT(ctime,"%Y%m")=concat(#{value},'04') and c.reportId=r.reportId and r.state=3
+        UNION all
+        select
+            sum(repicetotal) from cashier c,report r  where
+            DATE_FORMAT(ctime,"%Y%m")=concat(#{value},'05') and c.reportId=r.reportId and r.state=3
+        UNION all
+        select
+            sum(repicetotal) from cashier c,report r  where
+            DATE_FORMAT(ctime,"%Y%m")=concat(#{value},'06') and c.reportId=r.reportId and r.state=3
+        UNION all
+        select
+            sum(repicetotal) from cashier c,report r  where
+            DATE_FORMAT(ctime,"%Y%m")=concat(#{value},'07') and c.reportId=r.reportId and r.state=3
+        UNION all
+        select
+            sum(repicetotal) from cashier c,report r  where
+            DATE_FORMAT(ctime,"%Y%m")=concat(#{value},'08') and c.reportId=r.reportId and r.state=3
+        UNION all
+        select
+            sum(repicetotal) from cashier c,report r  where
+            DATE_FORMAT(ctime,"%Y%m")=concat(#{value},'09') and c.reportId=r.reportId and r.state=3
+        UNION all
+        select
+            sum(repicetotal) from cashier c,report r  where
+            DATE_FORMAT(ctime,"%Y%m")=concat(#{value},'10') and c.reportId=r.reportId and r.state=3
+        UNION all
+        select
+            sum(repicetotal) from cashier c,report r  where
+            DATE_FORMAT(ctime,"%Y%m")=concat(#{value},'11') and c.reportId=r.reportId and r.state=3
+        UNION all
+        select
+            sum(repicetotal) from cashier c,report r  where
+            DATE_FORMAT(ctime,"%Y%m")=concat(#{value},'12') and c.reportId=r.reportId and r.state=3
+    </select>
+    <select id="reportYearBingFinance" resultType="com.example.hospital.entity.Finance">
+        select sum(repicetotal) value,DATE_FORMAT(ctime,'%Y') name from cashier c,report r where c.reportId=r.reportId and r.state=3 GROUP BY DATE_FORMAT(ctime,'%Y')
+    </select>
+    <!--/*门诊医生收入统计对比*/-->
+    <select id="doctorDuibi" resultType="com.example.hospital.entity.SdoctorDuibi">
+        select COUNT(DISTINCT(c.reportId)) num , sum(c.repicetotal) total,d.doctorName doctorName from report r,cashier c,doctor d where r.reportId=c.reportId and r.doctor=d.doctorId and r.state=3 and d.dstate=0
+        <if test="doctorName!=null and doctorName!=''">
+            and d.doctorName like concat('%',concat(#{doctorName},'%'))
+        </if>
+        GROUP BY d.doctorName
+    </select>
+    <!--/*门诊当天*/-->
+    <select id="currentFinance" resultType="com.example.hospital.entity.currentFinance">
+        select sum(c.repicetotal) value, c.durgname name
+        from cashier c,report r  where
+            DATE_FORMAT(ctime,"%Y-%m-%d")=#{value} and c.reportId=r.reportId and r.state=3 or r.state=5 and DATE_FORMAT(ctime,"%Y-%m-%d")=#{value} and c.reportId=r.reportId GROUP BY c.durgname
+    </select>
+</mapper>
