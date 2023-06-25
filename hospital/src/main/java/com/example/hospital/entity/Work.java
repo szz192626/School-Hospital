@@ -1,6 +1,7 @@
 package com.example.hospital.entity;
 
 public class Work {
+//    ban
     private Integer workid;
     private String workname;
 

@@ -1,9 +1,10 @@
 package com.example.hospital.mapper;
 
 import com.example.hospital.entity.Upplier;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-
+@Mapper
 public interface UpplierMapper {
     //供货商的增删查改
     List<Upplier> findAllUpplier(Upplier upplier);
