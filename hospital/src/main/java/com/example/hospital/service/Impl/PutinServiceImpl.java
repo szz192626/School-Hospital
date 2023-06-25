@@ -1,5 +1,6 @@
 package com.example.hospital.service.Impl;
 
+import com.example.hospital.entity.Drugdictionary;
 import com.example.hospital.entity.Drugstore;
 import com.example.hospital.mapper.PutinMapper;
 import com.example.hospital.service.PutinService;
@@ -15,6 +16,10 @@ import java.util.List;
 public class PutinServiceImpl implements PutinService {
     @Resource
     private PutinMapper sm;
+
+    public List<Drugdictionary> seldcy(Drugdictionary drugdictionary) {
+        return sm.seldcy(drugdictionary);
+    }
 
 
     @Override

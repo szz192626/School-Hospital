@@ -10,6 +10,12 @@ public interface StoreMapper {
     List<Drugstore> selStore(Drugstore drugstore);
     //查询药品类型
     List <Type> seltype(Type type);
+    //查询药品产地
+    List<Area> selarea(Area area);
+    //查询药品单位
+    List<Unit> selunit(Unit Unit);
+    //查询经办人
+    List<Skull> selskull(Skull skull);
     //供货商
     List <Upplier> selupplier(Upplier upplier);
     //修改药品信息

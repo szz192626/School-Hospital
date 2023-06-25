@@ -1,8 +1,14 @@
 package com.example.hospital.service;
 
+import com.example.hospital.entity.Drugdictionary;
 import com.example.hospital.entity.Drugstore;
 
+import java.util.List;
+
 public interface PutinService {
+
+    //查询药品清单
+    List<Drugdictionary> seldcy(Drugdictionary drugdictionary);
 
     //添加入库
     int adddrugstore(Drugstore drugstoreName);

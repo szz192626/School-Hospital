@@ -3,9 +3,11 @@ package com.example.hospital.mapper;
 import com.example.hospital.entity.Lack;
 import com.example.hospital.entity.Recovery;
 import com.example.hospital.entity.YPharmacy;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+@Mapper
 public interface PharmacyMapper {
     //查询药房药品
     List<YPharmacy> selpharmacy(YPharmacy ypharmacy);

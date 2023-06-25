@@ -51,6 +51,21 @@ public class StoreController {
         return seltype;
     }
 
+    //查询计量单位
+    @RequestMapping("selunit")
+    @ResponseBody
+    public Object selunit(Unit unit) {
+        List<Unit> selunit = storeService.selunit(unit);
+        return selunit;
+    }
+    //查询产地
+    @RequestMapping("selarea")
+    @ResponseBody
+    public Object selarea(Area area) {
+        List<Area> selarea = storeService.selarea(area);
+        return selarea;
+    }
+
     //查询供货商
     @RequestMapping("selupplier")
     @ResponseBody
@@ -78,7 +93,23 @@ public class StoreController {
         return "drugstore/c_beputinstorage";
     }
 
+    @RequestMapping("selectdgty")
+    @ResponseBody
+    public Object selectdgty(Drugdictionary drugdictionary, Integer page, Integer limit) {
+        PageHelper.startPage(page, limit);
+        List<Drugdictionary> drugdictiona = putinService.seldcy(drugdictionary);
+        PageInfo pageInfo = new PageInfo(drugdictiona);
+        Map<String, Object> drugstoresData = new HashMap<String, Object>();
+        //这是layui要求返回的json数据格式
+        drugstoresData.put("code", 0);
+        drugstoresData.put("msg", "");
+        //将全部数据的条数作为count传给前台（一共多少条）
+        drugstoresData.put("count", pageInfo.getTotal());
+        //将分页后的数据返回（每页要显示的数据）
+        drugstoresData.put("data", pageInfo.getList());
 
+        return drugstoresData;
+    }
 
     //添加一条药品入库
     @RequestMapping("adddrugs")

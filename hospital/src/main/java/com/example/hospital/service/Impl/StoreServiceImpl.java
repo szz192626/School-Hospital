@@ -28,6 +28,20 @@ public class StoreServiceImpl implements StoreService {
     }
 
 
+    @Override
+    public List<Area> selarea(Area area) {
+        return sm.selarea(area);
+    }
+
+    @Override
+    public List<Unit> selunit(Unit unit) {
+        return sm.selunit(unit);
+    }
+
+    @Override
+    public List<Skull> selskull(Skull skull) {
+        return sm.selskull(skull);
+    }
 
     @Override
     public List<Upplier> selupplier(Upplier upplier) {
