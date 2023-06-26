@@ -1,7 +1,7 @@
 package com.example.hospital.controller;
 
-import com.example.hospital.entity.Litem;
-import com.example.hospital.service.LitemService;
+import com.example.hospital.entity.Checkup;
+import com.example.hospital.service.CheckupService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,28 +15,45 @@ import java.util.Map;
 
 /**
  * @author: szz
- * @date: 2023/6/23 18:45
- * @description LitemController
+ * @date: 2023/6/26 21:49
+ * @description CheckupController
  */
+
 @Controller
-@RequestMapping("/szz")
-public class LitemController {
+@RequestMapping("szz")
+public class CheckupController {
 
     @Autowired
-    private LitemService litemService;
+    private CheckupService checkupService;
 
-    @RequestMapping("/item")
-    public String item(){
-        return  "szz/item";
+    @RequestMapping("/checkup")
+    public String checkup(){
+        return "liao/checkup";
     }
 
-    //查询收费项目
-    @RequestMapping("/selItems")
+    //添加检查结果
+    @RequestMapping("/addCheckup")
     @ResponseBody
-    public Object selItems(Integer page, Integer limit, Litem litem){
+    public Object addCheckup(Checkup lcheckup){
+        //添加检查结果
+        int i = checkupService.addCheckup(lcheckup);
+        if(i==1){
+            //添加检查费用
+            checkupService.updPrice(lcheckup);
+            return null;
+        }else{
+            return "添加异常";
+        }
+    }
+
+
+    //查询患者检查结果
+    @RequestMapping("/selCheckup")
+    @ResponseBody
+    public Object selCheckup(Integer page, Integer limit,Checkup lcheckup){
         PageHelper.startPage(page, limit);
-        List<Litem> listAll =litemService.selItems(litem);
-        PageInfo pageInfo = new PageInfo(listAll);
+        List<Checkup> lcheckups = checkupService.selCheckup(lcheckup);
+        PageInfo pageInfo = new PageInfo(lcheckups);
         Map<String, Object> tableData = new HashMap<String, Object>();
         //这是layui要求返回的json数据格式
         tableData.put("code", 0);
@@ -47,13 +64,4 @@ public class LitemController {
         tableData.put("data", pageInfo.getList());
         return tableData;
     }
-
-    //添加收费项目
-
-
-    //查询患者收费项目
-
-
-    //移除患者收费项目
-
 }

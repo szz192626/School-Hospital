@@ -153,6 +153,7 @@ public class CashierController {
         Integer addbing = cashierService.addbing(report);
         return addbing;
     }
+
     //查询用户有没有填写病因
     @RequestMapping("selbing")
     @ResponseBody
@@ -160,4 +161,67 @@ public class CashierController {
         String selbing = cashierService.selbing(reid);
         return selbing;
     }
+    //查看用户的检查结果
+    @RequestMapping("lookbing")
+    @ResponseBody
+    public Object lookbing(Integer reid){
+        String lookbing = cashierService.lookbing(reid);
+        return lookbing;
+    }
+    //查看该用户是否还有未交钱的项目
+    @RequestMapping("seljiao")
+    @ResponseBody()
+    public Object seljiao(Integer reid){
+        int seljiao = cashierService.seljiao(reid);
+        return seljiao;
+    }
+    //查询该用户所有的处方
+    @RequestMapping("selall")
+    @ResponseBody
+    public Object selall(Integer perid,Integer page, Integer limit){
+        List<Cashier> selall = cashierService.selall(perid);
+        PageHelper.startPage(page, limit);
+        PageInfo pageInfo = new PageInfo(selall);
+        Map<String, Object> tableData = new HashMap<String, Object>();
+        //这是layui要求返回的json数据格式，如果后台没有加上这句话的话需要在前台页面手动设置
+        tableData.put("code", 0);
+        tableData.put("msg", "");
+        //将全部数据的条数作为count传给前台（一共多少条）
+        tableData.put("count", pageInfo.getTotal());
+        //将分页后的数据返回（每页要显示的数据）
+        tableData.put("data", pageInfo.getList());
+        return tableData;
+    }
+    //查询用户所有的项目处方
+    @RequestMapping("selximu")
+    @ResponseBody
+    public Object selximu(Integer perid,Integer page, Integer limit){
+        List<Cashier> selximu = cashierService.selximu(perid);
+        PageHelper.startPage(page, limit);
+        PageInfo pageInfo = new PageInfo(selximu);
+        Map<String, Object> tableData = new HashMap<String, Object>();
+        //这是layui要求返回的json数据格式，如果后台没有加上这句话的话需要在前台页面手动设置
+        tableData.put("code", 0);
+        tableData.put("msg", "");
+        //将全部数据的条数作为count传给前台（一共多少条）
+        tableData.put("count", pageInfo.getTotal());
+        //将分页后的数据返回（每页要显示的数据）
+        tableData.put("data", pageInfo.getList());
+        return tableData;
+    }
+    //查看该用户是否有缴费未做的项目
+    @RequestMapping("selwei")
+    @ResponseBody
+    public Object selwei(Integer reid){
+        //查询该用户有几个做过的项目
+        Integer selyi = cashierService.selyi(reid);
+        //查询该用户有几个缴费的项目
+        Integer selgong = cashierService.selgong(reid);
+        if(selyi==selgong){
+            return 1;
+        }else {
+            return 0;
+        }
+    }
 }
+
