@@ -5,14 +5,14 @@
 <mapper namespace="com.example.hospital.mapper.StoreMapper">
     <!-- 仓库库存药品信息-->
     <select id="selStore" resultType="Drugstore">
-        SELECT d.rugstoreId,wa.supplierName warehouseName ,wa.warehouseId,d.type typeId,d.unit unitId,d.area areaId,d. skullId , d. supplierId ,d.drugstoreName,su.supplierName ,sk.skullName,un.unitName,d.tradePrice,
+        SELECT d.drugstoreId,wa.supplierName warehouseName ,wa.warehouseId,d.type typeId,d.upplier upplierId,d.area areaId,d. skullId , d. supplierId ,d.drugstoreName,su.supplierName ,sk.skullName,un.unitName,d.tradePrice,
         d.sellingPrice,ar.areaName,d.produceDate,d.validDate,d.batch,d.drugstorenum,ty.typeName	from
         drugstore d,upplier su,skull sk,warehuose wa,unit un,area ar,type ty  where d.supplierId=su.supplierId
         and d.skullId=sk.skullId and d.warehouseId=wa.warehouseId and d.unit=un.unitId and d.type=ty.typeId and d.area=ar.areaId
         <if test="drugstoreName!=null and drugstoreName!=''">
             and d.drugstoreName like concat('%' ,concat(#{drugstoreName},'%'))
         </if>
-        ORDER BY d.rugstoreId desc
+        ORDER BY d.drugstoreId desc
     </select>
     <!--  药品类型-->
     <select id="seltype" resultType="Type">
@@ -62,7 +62,7 @@
     </select>
     <!--    仓库已经过期的药品-->
     <select id="seldrugDate" resultType="Drugstore">
-        SELECT d.rugstoreId,wa.supplierName warehouseName ,d.type typeId,d.unit unitId,d.area areaId,d. skullId , d. supplierId ,d.drugstoreName,su.supplierName ,sk.skullName,un.unitName,d.tradePrice,
+        SELECT d.drugstoreId,wa.supplierName warehouseName ,d.type typeId,d.unit unitId,d.area areaId,d. skullId , d. supplierId ,d.drugstoreName,su.supplierName ,sk.skullName,un.unitName,d.tradePrice,
                d.sellingPrice,ar.areaName,d.produceDate,d.validDate,d.batch,d.drugstorenum,ty.typeName	from
                                                                                                               drugstore d,upplier su,skull sk,warehuose wa,unit un,area ar,type ty  where d.supplierId=su.supplierId
                                                                                                                                                                                       and d.skullId=sk.skullId and d.warehouseId=wa.warehouseId and d.unit=un.unitId and d.type=ty.typeId and
@@ -74,29 +74,29 @@
     </select>
     <!-- 删除过期药品-->
     <delete id="delexpiredurg" parameterType="drugstore">
-        DELETE from drugstore where rugstoreId =#{rugstoreId};
+        DELETE from drugstore where drugstoreId =#{drugstoreId};
     </delete>
     <!-- 添加采购单-->
     <insert id="addpurchase" parameterType="purchase" >
-        INSERT into caigou(caigouname,gonghuoshang,danwei,candi,leixing,shuliang)
-        VALUES(#{caigouname},#{gonghuoshang},#{danwei},#{candi},#{leixing},#{shuliang})
+        INSERT into caigou(purchasename,skull,unit,area,type,num)
+        VALUES(#{purchasename},#{skull},#{unit},#{area},#{type},#{num})
     </insert>
     <!-- 添加采购药品时 查询采购表是否已存在此药-->
     <select id="selpurchasename" resultType="Integer">
-        SELECT count(*)from  caigou where caigouname=#{caigouname}
+        SELECT count(*)from  purchase where purchasename=#{purchasename}
 
     </select>
     <!--   已存在则修改数量-->
     <update id="uppurchasenumber">
-        UPDATE caigou set shuliang =(shuliang+#{shuliang}) where caigouname=#{caigouname}
+        UPDATE purchase set num =(num+#{num}) where purchasename=#{purchasename}
     </update>
     <!--   查询采购单-->
     <select id="selpurchase" resultType="purchase">
-        select  * from caigou
+        select  * from purchase
     </select>
     <!--    删除采购数据-->
     <delete id="delpurchase"  parameterType="Integer" >
-        delete  from caigou where caigouid =#{caigouid}
+        delete  from purchase where purchaseid =#{purchaseid}
     </delete>
 
 </mapper>
