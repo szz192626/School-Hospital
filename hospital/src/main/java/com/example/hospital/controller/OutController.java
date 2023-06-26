@@ -23,19 +23,19 @@ import java.util.Map;
  * @description OutController
  */
 @Controller
-@RequestMapping("caoout")
+@RequestMapping("szz")
 public class OutController {
     @Autowired
     private OutService cOutService;
     //进入处方划价页面
     @RequestMapping("xiang")
     public Object xiang(Model model){
-        return  "cao/Cxiangmu";
+        return  "zhou/Cxiangmu";
     }
     //进入收费页面
     @RequestMapping("out")
     public Object look(Model model){
-        return  "cao/Ctoll";
+        return  "zhou/Ctoll";
     }
     //查询药品所有信息
     @RequestMapping("selout")

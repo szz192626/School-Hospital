@@ -82,7 +82,31 @@
         SELECT zhuan FROM report WHERE reportId=#{rid}
     </select>
     <!--查询所有药房-->
-    <select id="selware" resultType="CWarehuose">
+    <select id="selware" resultType="com.example.hospital.entity.Warehuose">
         select * from warehuose
+    </select>
+    <!--查询用户项目的检查结果-->
+    <select id="lookbing" parameterType="Integer" resultType="String">
+        select jie from cashier where  cashier=#{cashier};
+    </select>
+    <!--查询该用户是否还有为交钱的项目-->
+    <select id="seljiao" parameterType="int" resultType="int">
+        SELECT count(mstate) FROM cashier WHERE reportId=#{reid} AND mstate=0 AND state=1
+    </select>
+    <!--查询用户有几个已经做过的项目-->
+    <select id="selyi" parameterType="Integer" resultType="Integer">
+        SELECT count(jie) FROM cashier WHERE reportId=#{reid} AND jie!='' AND mstate=1 AND ostate=1
+    </select>
+    <!--查询用户一共有几个缴费项目-->
+    <select id="selgong" parameterType="Integer" resultType="Integer">
+        SELECT COUNT(cashier) FROM cashier WHERE reportId=#{reid} AND mstate=1 AND ostate=1 AND state=1
+    </select>
+    <!--查询所有的账单-->
+    <select id="selall" resultType="com.example.hospital.entity.Cashier" parameterType="Integer">
+        select * from cashier where reportId=#{perid} and state !=2
+    </select>
+    <!--查询用户项目账单-->
+    <select id="selximu" resultType="com.example.hospital.entity.Cashier" parameterType="Integer">
+        select * from cashier where reportId=#{perid} and state =1
     </select>
 </mapper>

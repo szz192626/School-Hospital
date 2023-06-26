@@ -31,4 +31,16 @@ public interface CashierService {
     String selbing(Integer rid);
     //查询所有药房
     List<Warehouse> selware();
+    //查询用户做项目的结果
+    String lookbing(Integer reid);
+    //查询该用户是否还有未交钱的项目
+    int seljiao(Integer reid);
+    //查看该用户有几个已经做过的项目
+    Integer selyi(Integer reid);
+    //查询该用户有几个已经交过钱的项目
+    Integer selgong(Integer reid);
+    //查询用户所有的处方
+    List<Cashier> selall(Integer perid);
+    //查询用户项目的处方
+    List<Cashier> selximu(Integer perid);
 }
