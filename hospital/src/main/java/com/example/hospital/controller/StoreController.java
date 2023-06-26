@@ -1,6 +1,7 @@
 package com.example.hospital.controller;
 
 import com.example.hospital.entity.*;
+import com.example.hospital.entity.Record;
 import com.example.hospital.service.PutinService;
 import com.example.hospital.service.RecordService;
 import com.example.hospital.service.StoreService;
