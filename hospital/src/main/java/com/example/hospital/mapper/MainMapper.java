@@ -1,9 +1,11 @@
 package com.example.hospital.mapper;
 
 import com.example.hospital.entity.Schedule;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+@Mapper
 public interface MainMapper {
     List<Schedule> monday();
     List<Schedule> tuesday();

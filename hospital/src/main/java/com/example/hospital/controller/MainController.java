@@ -3,11 +3,14 @@ package com.example.hospital.controller;
 import com.example.hospital.entity.Schedule;
 import com.example.hospital.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+@Controller
+@RequestMapping("main")
 public class MainController {
     /*
      * 查询周一到周日的排班

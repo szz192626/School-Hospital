@@ -104,4 +104,30 @@
     <select id="seltymo" parameterType="com.example.hospital.entity.Registeredtype" resultType="Integer">
         select price from registeredtype where registeredId=#{registeredId}
     </select>
+    <!--查询排班的日期-->
+    <select id="one" parameterType="com.example.hospital.entity.Doctor" resultType="com.example.hospital.entity.Doctor">
+        select d.doctorName doctorName,d.doctorId from doctor d, paiban p where departmentId=#{departmentId} and registeredid=#{registeredid} and d.doctorId=p.doctorId and p.one  != '无班' and  d.dstate!=3 and d.dstate=0
+    </select>
+    <select id="two" parameterType="com.example.hospital.entity.Doctor" resultType="com.example.hospital.entity.Doctor">
+        select d.doctorName doctorName,d.doctorId from doctor d, paiban p where departmentId=#{departmentId} and registeredid=#{registeredid} and d.doctorId=p.doctorId and p.two  != '无班' and  d.dstate!=3 and d.dstate=0
+    </select>
+    <select id="three" parameterType="com.example.hospital.entity.Doctor" resultType="com.example.hospital.entity.Doctor">
+        select d.doctorName doctorName,d.doctorId from doctor d, paiban p where departmentId=#{departmentId} and registeredid=#{registeredid} and d.doctorId=p.doctorId and p.three  != '无班' and  d.dstate!=3 and d.dstate=0
+    </select>
+    <select id="four" parameterType="com.example.hospital.entity.Doctor" resultType="com.example.hospital.entity.Doctor">
+        select d.doctorName doctorName,d.doctorId from doctor d, paiban p where departmentId=#{departmentId} and registeredid=#{registeredid} and d.doctorId=p.doctorId and p.four  != '无班' and  d.dstate!=3 and d.dstate=0
+    </select>
+    <select id="five" parameterType="com.example.hospital.entity.Doctor" resultType="com.example.hospital.entity.Doctor">
+        select d.doctorName doctorName,d.doctorId from doctor d, paiban p where departmentId=#{departmentId} and registeredid=#{registeredid} and d.doctorId=p.doctorId and p.five  != '无班' and  d.dstate!=3 and d.dstate=0
+    </select>
+    <select id="six" parameterType="com.example.hospital.entity.Doctor" resultType="com.example.hospital.entity.Doctor">
+        select d.doctorName doctorName,d.doctorId from doctor d, paiban p where departmentId=#{departmentId} and registeredid=#{registeredid} and d.doctorId=p.doctorId and p.six  != '无班' and  d.dstate!=3 and d.dstate=0
+    </select>
+    <select id="seven" parameterType="com.example.hospital.entity.Doctor" resultType="com.example.hospital.entity.Doctor">
+        select d.doctorName doctorName,d.doctorId from doctor d, paiban p where departmentId=#{departmentId} and registeredid=#{registeredid} and d.doctorId=p.doctorId and p.seven  != '无班' and  d.dstate!=3 and d.dstate=0
+    </select>
+    <!--查询所有的科室-->
+    <select id="seldep" resultType="com.example.hospital.entity.Departments">
+        select * from  departments
+    </select>
 </mapper>

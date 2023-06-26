@@ -1,8 +1,6 @@
 package com.example.hospital.service.Impl;
 
-import com.example.hospital.entity.Registeredtype;
-import com.example.hospital.entity.Report;
-import com.example.hospital.entity.ReportVo;
+import com.example.hospital.entity.*;
 import com.example.hospital.mapper.ReportMapper;
 import com.example.hospital.service.ReportService;
 import org.springframework.stereotype.Service;
@@ -62,6 +60,46 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public Integer seltymo(Registeredtype registeredtype) {
         return reportMapper.seltymo(registeredtype);
+    }
+    //查询科室
+    @Override
+    public List<Departments> seldep() {
+        return reportMapper.seldep();
+    }
+    //查询排班医生
+    @Override
+    public List<ReportVo> one(Doctor doctor) {
+        return reportMapper.one(doctor);
+    }
+
+    @Override
+    public List<ReportVo> two(Doctor doctor) {
+        return reportMapper.two(doctor);
+    }
+
+    @Override
+    public List<ReportVo> three(Doctor doctor) {
+        return reportMapper.three(doctor);
+    }
+
+    @Override
+    public List<ReportVo> four(Doctor doctor) {
+        return reportMapper.four(doctor);
+    }
+
+    @Override
+    public List<ReportVo> five(Doctor doctor) {
+        return reportMapper.five(doctor);
+    }
+
+    @Override
+    public List<ReportVo> six(Doctor doctor) {
+        return reportMapper.six(doctor);
+    }
+
+    @Override
+    public List<ReportVo> seven(Doctor doctor) {
+        return reportMapper.seven(doctor);
     }
 
 }
