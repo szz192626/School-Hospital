@@ -21,26 +21,26 @@
     </delete>
     <!--   添加到回收表-->
     <insert id="addrecovery" >
-        insert into huishou(huishouname,huishounumber,huishoupihao,jbr,beizhu) VALUES(#{huishouname},#{huishounumber},#{huishoupihao},#{jbr},#{beizhu});
+        insert into recovery (recoveryname,recoverynumber,recoverypihao,jbr,beizhu) VALUES(#{recoveryname},#{recoverynumber},#{recoverypihao},#{jbr},#{beizhu});
     </insert>
     <!-- 查询药房回收表数据-->
     <select id="selrecovery">
-        select  * from huishou
+        select  * from recovery
     </select>
     <delete id="delrecovery">
-        delete  from huishou where huishouid  =#{huishouid}
+        delete  from recovery where recoveryid  =#{recoveryid}
     </delete>
 
     <insert id="addlack"  >
-        INSERT into baoque(baoqueName,baoqueNum)VALUES(#{baoqueName},#{baoqueNum})
+        INSERT into lack(lackName,lackNum)VALUES(#{lackName},#{lackNum})
     </insert>
     <!-- 添加报缺药品时 查询报缺表是否已存在此药-->
     <select id="sellackname" resultType="Integer">
-        SELECT count(*)from  baoque where baoqueName=#{baoqueName}
+        SELECT count(*)from  lack where baoqueName=#{lackName}
 
     </select>
     <!--   已存在则修改数量-->
     <update id="uplacknum">
-        UPDATE baoque set baoqueNum =(baoqueNum+#{baoqueNum}) where baoqueName=#{baoqueName}
+        UPDATE lack set lackNum =(lackNum+#{lackNum}) where lackName=#{lackName}
     </update>
 </mapper>

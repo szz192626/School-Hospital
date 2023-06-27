@@ -80,4 +80,34 @@ public class CashierServiceImpl implements CashierService {
     public List<Warehouse> selware() {
         return cashierMapper.selware();
     }
+    //查询用户做项目的结果
+    @Override
+    public String lookbing(Integer reid) {
+        return cashierMapper.lookbing(reid);
+    }
+    //查询该用户是否还有未交钱的项目
+    @Override
+    public int seljiao(Integer reid) {
+        return cashierMapper.seljiao(reid);
+    }
+    //查看该用户有几个已经做过的项目
+    @Override
+    public Integer selyi(Integer reid) {
+        return cashierMapper.selyi(reid);
+    };
+    //查询该用户有几个已经交过钱的项目
+    @Override
+    public Integer selgong(Integer reid) {
+        return cashierMapper.selgong(reid);
+    }
+    //查询用户所有的处方
+    @Override
+    public List<Cashier> selall(Integer perid) {
+        return cashierMapper.selall(perid);
+    }
+    //查询用户项目的处方
+    @Override
+    public List<Cashier> selximu(Integer perid) {
+        return cashierMapper.selximu(perid);
+    }
 }
