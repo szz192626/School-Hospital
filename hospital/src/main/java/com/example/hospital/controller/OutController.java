@@ -23,7 +23,7 @@ import java.util.Map;
  * @description OutController
  */
 @Controller
-@RequestMapping("caoout")
+@RequestMapping("szzout")
 public class OutController {
     @Autowired
     private OutService cOutService;
