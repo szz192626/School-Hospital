@@ -70,7 +70,7 @@
     <!--添加挂号人员-->
     <insert id="addre" parameterType="com.example.hospital.entity.Report">
         INSERT INTO report (reportname,sex,age,department,doctor,reporttype,price,time,users,state,phone,carid)
-        VALUES (#{reportName},#{sex},#{age},#{department},#{doctor},#{reporttype},#{price},NOW(),#{users},1,#{phone},#{carid})
+        VALUES (#{reportName},#{sex},#{age},#{department},#{doctor},#{reporttype},#{price},#{time},#{users},1,#{phone},#{carid})
     </insert>
     <!--根据患者id修改该患者的状态让他在前台不显示-->
     <update id="delre" parameterType="Integer">

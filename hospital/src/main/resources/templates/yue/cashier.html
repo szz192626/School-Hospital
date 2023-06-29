@@ -153,7 +153,7 @@
 <!--填写病因页面结束-->
 <!--查看病因页面开始-->
 <div style="display: none;padding-top: 20px" id="bingzhaung" >
-    <div style="height: 30px;width: 100px;margin-left:30px;line-height: 30px;">查看用户病况:</div>
+    <div style="height: 30px;width: 100px;margin-left:30px;line-height: 30px;">查看患者病况:</div>
     <textarea id="bingzh" readonly style="width: 600px;margin-left: 30px;height: 300px;" required lay-verify="required" placeholder="请输入症状病因" class="layui-textarea"></textarea>
 </div>
 <!--查看病因页面结束-->
@@ -184,7 +184,7 @@
                     people=table.render({
                         elem: '#userTable'   //渲染的目标对象
                         ,url:'selpreson' //数据接口
-                        ,title: '用户数据表'//数据导出来的标题
+                        ,title: '患者数据表'//数据导出来的标题
                         ,cellMinWidth:200 //设置列的最小默认宽度
                         /*,parseData:function(res){
                              return{
