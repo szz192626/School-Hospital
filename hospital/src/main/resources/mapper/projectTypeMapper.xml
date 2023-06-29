@@ -21,5 +21,25 @@
     <select id="count1" resultType="int">
         select count(*) from projecttype where projectName=#{projectName}
     </select>
+    <!--门诊收费项目增删改查开始-->
+    <select id="findAllOutpatienttype" resultType="com.example.hospital.entity.Outpatienttype">
+        SELECT o.ostate, o.outpatientId,p.projectName pprojectName,o.projectName projectName,p.projectId projectId,u.unitName,u.unitId unitId ,o.price from outpatienttype o,unit u, projecttype p where o.unit=u.unitId and p.projectId=o.bigprojectId
 
+        <if test="projectName!=null and projectName!=''">
+            and  o.projectName like concat('%',concat(#{projectName},'%'))
+        </if> order by o.outpatientId desc
+    </select>
+    <insert id="addOutpatienttype" parameterType="com.example.hospital.entity.Outpatienttype">
+        insert into outpatienttype(projectName, unit, bigprojectId, price,ostate) values (#{projectName}, #{unit}, #{bigprojectId}, #{price},#{ostate})
+    </insert>
+    <update id="editOutpatienttype" parameterType="com.example.hospital.entity.Outpatienttype">
+        update outpatienttype set price=#{price},unit=#{unit},bigprojectId=#{bigprojectId},ostate=#{ostate} where outpatientId=#{outpatientId}
+    </update>
+    <delete id="deleteOutpatienttype" parameterType="Integer">
+        delete from outpatienttype where outpatientId=#{outpatientId}
+    </delete>
+    <select id="count2" resultType="int">
+        select  count(*) from outpatienttype where projectName=#{projectName}
+    </select>
+    <!-- 门诊收费项目增删改查结束-->
 </mapper>

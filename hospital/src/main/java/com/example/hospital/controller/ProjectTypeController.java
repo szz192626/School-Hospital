@@ -37,4 +37,36 @@ public class ProjectTypeController {
         tableData.put("data", pageInfo.getList());
         return tableData;
     }
+    /*
+     * 添加生产项目大类
+     * */
+    @RequestMapping("addProjecttype")
+    @ResponseBody
+    public Object addProjecttype(Projecttype projecttype){
+        int i1 = projectTypeService.count1(projecttype);
+        if(i1==0){
+            int i = projectTypeService.addProjecttype(projecttype);
+            if(i==1){
+                return "添加成功";
+            }else{
+                return "添加失败";
+            }
+        }else{
+            return projecttype.getProjectName()+"已存在";
+        }
+
+    }
+    /*
+     * 删除生产项目大类
+     * */
+    @RequestMapping("deleteProjecttype")
+    @ResponseBody
+    public Object deleteProjecttype(Integer projectId){
+        int i = projectTypeService.deleteProjecttype(projectId);
+        if(i==1){
+            return "删除成功";
+        }else{
+            return "删除失败";
+        }
+    }
 }
