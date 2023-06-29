@@ -32,7 +32,7 @@ public class MenuController extends BaseController {
     //跳转到登陆页面
     @RequestMapping("toLogin")
     public String toLogin() {
-        return "view/login";
+        return "wqf/login";
     }
     //登陆   shiro登陆
     @RequestMapping("login")
@@ -54,14 +54,14 @@ public class MenuController extends BaseController {
             model.addAttribute("id",users.getUserid());
             //把yonghu放进session
             request.getSession().setAttribute("yonghu", users.getRealname());
-            return "view/index";//跳转首页
+            return "wqf/index";//跳转首页
         } catch (UnknownAccountException e) {
             //用户为空或不存在
             model.addAttribute("msg", "不存在这样的用户!");
-            return "view/login";
+            return "wqf/login";
         } catch (IncorrectCredentialsException e) {
             model.addAttribute("msg", "密码输入不对!");
-            return "view/login";
+            return "wqf/login";
         }
     }
     /*
