@@ -1,5 +1,4 @@
-package  com.example.hospital.controller;
-
+package com.example.hospital.controller;
 
 import com.example.hospital.entity.Cashier;
 import com.example.hospital.entity.Outpatienttype;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 @Controller
 @RequestMapping("szzout")
 public class OutController {
@@ -51,6 +49,9 @@ public class OutController {
         tableData.put("data", pageInfo.getList());
         return tableData;
     }
+
+
+
     //查询处方中是否有这个药
     @RequestMapping("selchuo")
     @ResponseBody
@@ -82,6 +83,7 @@ public class OutController {
         cPharmacy.setPharmacyName(pharmacyName);
         return updchuo;
     }
+
     //删除处方中的药品
     @RequestMapping("delo")
     @ResponseBody
