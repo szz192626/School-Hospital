@@ -44,6 +44,7 @@
       <div class="layui-inline">
         <label class="layui-form-label">菜单名称:</label>
         <div class="layui-input-inline">
+<!--          autocomplete自动完成-->
           <input type="text" name="title" autocomplete="off" class="layui-input">
         </div>
       </div>
@@ -60,6 +61,7 @@
 
 
 <!-- 数据表格开始 -->
+<!--lay-filter:事件过滤器，相当于是layui中的标签id，后面表格中的一些触发事件需要用到。-->
 <table class="layui-hide" id="menuTable" lay-filter="menuTable"></table>
 <div style="display: none;" id="menuToolBar">
   <button type="button" class="layui-btn layui-btn-sm" lay-event="add">增加</button>
