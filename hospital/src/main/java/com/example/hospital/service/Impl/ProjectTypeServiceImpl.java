@@ -1,5 +1,6 @@
 package com.example.hospital.service.Impl;
 
+import com.example.hospital.entity.Outpatienttype;
 import com.example.hospital.entity.Projecttype;
 import com.example.hospital.mapper.ProjectTypeMapper;
 import com.example.hospital.service.ProjectTypeService;
@@ -37,5 +38,32 @@ public class ProjectTypeServiceImpl implements ProjectTypeService {
     @Override
     public int count1(Projecttype projecttype) {
         return projectTypeMapper.count1(projecttype);
+    }
+    /*
+     * 门诊项目增删改查
+     * */
+    @Override
+    public List<Outpatienttype> findAllOutpatienttype(Outpatienttype outpatienttype) {
+        return projectTypeMapper.findAllOutpatienttype(outpatienttype);
+    }
+
+    @Override
+    public int addOutpatienttype(Outpatienttype outpatienttype) {
+        return projectTypeMapper.addOutpatienttype(outpatienttype);
+    }
+
+    @Override
+    public int editOutpatienttype(Outpatienttype outpatienttype) {
+        return projectTypeMapper.editOutpatienttype(outpatienttype);
+    }
+
+    @Override
+    public int deleteOutpatienttype(Integer outpatientId) {
+        return projectTypeMapper.deleteOutpatienttype(outpatientId);
+    }
+
+    @Override
+    public int count2(Outpatienttype outpatienttype) {
+        return projectTypeMapper.count2(outpatienttype);
     }
 }

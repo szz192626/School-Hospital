@@ -1,4 +1,3 @@
-
 package com.example.hospital.controller;
 
 import com.example.hospital.entity.Cashier;
@@ -17,12 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-/**
- * @author: szz
- * @date: 2023/6/22 17:22
- * @description OutController
- */
 @Controller
 @RequestMapping("szzout")
 public class OutController {
@@ -41,7 +34,7 @@ public class OutController {
     //查询药品所有信息
     @RequestMapping("selout")
     @ResponseBody
-    public Object seldrug(Outpatienttype coutpatienttype, Integer page, Integer limit,String projectName){
+    public Object seldrug(Outpatienttype coutpatienttype, Integer page, Integer limit, String projectName){
         coutpatienttype.setProjectName(projectName);
         PageHelper.startPage(page, limit);
         List<Pharmacy> selout = cOutService.selout(coutpatienttype);
@@ -117,5 +110,4 @@ public class OutController {
         Integer guafei = cOutService.guafei(reportVo);
         return  shoufei;
     }
-
 }

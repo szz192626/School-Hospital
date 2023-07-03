@@ -54,7 +54,7 @@ public class MenuController extends BaseController {
             model.addAttribute("id",users.getUserid());
             //把yonghu放进session
             request.getSession().setAttribute("yonghu", users.getRealname());
-            return "wqf/index";//跳转首页
+            return "yue/index";//跳转首页
         } catch (UnknownAccountException e) {
             //用户为空或不存在
             model.addAttribute("msg", "不存在这样的用户!");
